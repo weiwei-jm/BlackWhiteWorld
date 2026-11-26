@@ -18,6 +18,7 @@ public class BlackWhiteMod extends Mod {
         Events.on(ClientLoadEvent.class, e -> {
             Log.info("开始加载黑白着色器...");
             
+            // 替换原版的核心着色器
             replaceShader("sprite"); 
             replaceShader("water");
             replaceShader("shield");
@@ -28,6 +29,7 @@ public class BlackWhiteMod extends Mod {
 
     private void replaceShader(String name) {
         try {
+            // 注意：这里的路径去掉了 assets/，因为你的 jar 包结构里就是直接在根目录的 shaders 下
             String vert = Core.files.internal("shaders/bw.vert").readString();
             String frag = Core.files.internal("shaders/bw.frag").readString();
             Shader bwShader = new Shader(vert, frag);
